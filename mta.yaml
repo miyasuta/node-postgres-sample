@@ -1,0 +1,27 @@
+_schema-version: '3.1'
+ID: node-postgres-sample
+version: 1.0.0
+
+modules:
+ - name: node-postgres-sample-srv
+   type: nodejs
+   path: srv
+   provides:
+    - name: srv-api
+      properties:
+        srv-url: ${default-url}
+   build-parameters:
+     ignore: ["node_modules/"]        
+   requires:
+    - name: cap-posgre-sample-db
+    
+resources:
+  - name: cap-posgre-sample-db
+    parameters:
+      service: postgresql-db
+      service-plan: trial
+      skip-service-updates:
+        parameters: true
+    type: org.cloudfoundry.existing-service   
+
+
