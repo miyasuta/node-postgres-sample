@@ -3,6 +3,21 @@ ID: node-postgres-sample
 version: 1.0.0
 
 modules:
+ - name: node-postgres-sample-approuter
+   type: approuter.nodejs
+   path: approuter
+   parameters:
+     disk-quota: 512M
+     memory: 512M
+   requires:
+     - name: node-postgres-sample-uaa
+     - name: srv-api
+       group: destinations
+       properties:
+         name: srv-api
+         url: "~{srv-url}"
+         forwardAuthToken: true    
+
  - name: node-postgres-sample-srv
    type: nodejs
    path: srv
@@ -14,6 +29,7 @@ modules:
      ignore: ["node_modules/"]        
    requires:
     - name: cap-posgre-sample-db
+    - name: node-postgres-sample-uaa      
     
 resources:
   - name: cap-posgre-sample-db
@@ -22,6 +38,13 @@ resources:
       service-plan: trial
       skip-service-updates:
         parameters: true
-    type: org.cloudfoundry.existing-service   
+    type: org.cloudfoundry.existing-service  
+    
+  - name: node-postgres-sample-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa       
 
 

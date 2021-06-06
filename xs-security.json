@@ -1,0 +1,31 @@
+{
+    "xsappname": "node-postgres-sample",
+    "tenant-mode": "dedicated",
+    "scopes": [
+      {
+        "name": "$XSAPPNAME.Display",
+        "description": "Display Products"
+      },
+      {
+        "name": "$XSAPPNAME.Update",
+        "description": "Update Products"
+      }
+    ],
+    "role-templates": [
+      {
+        "name": "Viewer",
+        "description": "View Products",
+        "scope-references": [
+          "$XSAPPNAME.Display"
+        ]
+      },
+      {
+        "name": "Manager",
+        "description": "Maintain Products",
+        "scope-references": [
+          "$XSAPPNAME.Display",
+          "$XSAPPNAME.Update"
+        ]
+      }
+    ]
+  }

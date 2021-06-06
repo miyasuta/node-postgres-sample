@@ -1,0 +1,24 @@
+{
+    "welcomeFile": "/demomanageproducts",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^/node-pg/products(.*)$",
+            "target": "/products$1",
+            "authenticationType": "xsuaa",
+            "destination": "srv-api",
+            "scope": {
+                "GET": ["$XSAPPNAME.Display", "$XSAPPNAME.Update"],
+                "default": "$XSAPPNAME.Update"
+            },
+            "csrfProtection": false            
+        },
+        {
+            "source": "^/node-pg/",
+            "target": "/",
+            "authenticationType": "xsuaa",
+            "destination": "srv-api",
+            "csrfProtection": false     
+        }                  
+     ]
+  }
