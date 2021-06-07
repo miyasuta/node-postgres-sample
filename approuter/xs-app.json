@@ -19,6 +19,12 @@
             "authenticationType": "xsuaa",
             "destination": "srv-api",
             "csrfProtection": false     
-        }                  
+        },
+        {
+            "source": "^/test/",
+            "target": "/",
+            "authenticationType": "xsuaa",
+            "localDir": "../demo.manageproducts/uimodule/webapp"
+        }                   
      ]
   }

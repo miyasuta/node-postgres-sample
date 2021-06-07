@@ -44,7 +44,7 @@ sap.ui.define([
             } else {
                 this.setProperty("viewModel", "deleteEnabled", false);
             }
-        },        
+        },
 
         _onRouteMatched: function () {
             this._doRefresh()

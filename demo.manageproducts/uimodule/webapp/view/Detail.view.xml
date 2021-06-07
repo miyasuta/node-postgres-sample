@@ -4,7 +4,8 @@
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"   
   xmlns:mvc="sap.ui.core.mvc">
-  <Page title="Prodct Detail" floatingFooter="true" showFooter="{viewModel>/editable}">
+  <Page title="Prodct Detail" floatingFooter="true" showFooter="{viewModel>/editable}" 
+    showNavButton="true" navButtonPress="onNavButtonPress">
     <headerContent>
 			<OverflowToolbar>
 				<ToolbarSpacer/>

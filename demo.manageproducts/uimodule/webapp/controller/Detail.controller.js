@@ -50,6 +50,11 @@ sap.ui.define([
             }); 
         },
 
+        
+        onNavButtonPress: function () {
+            this.onNavBack()
+        },        
+
         _deleteItem: function (oAction) {
             if (oAction === MessageBox.Action.CLOSE) { 
                 return
