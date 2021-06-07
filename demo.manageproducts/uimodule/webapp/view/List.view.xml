@@ -1,0 +1,36 @@
+ <mvc:View controllerName="demo.manageproducts.controller.List"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <Table id="table" 
+    items="{path: '/'}" mode="MultiSelect" selectionChange="onSelectionChange" busy="{viewModel>/busy}">
+    <headerToolbar>
+      <OverflowToolbar>
+        <content>
+          <Title text="Products" />
+          <ToolbarSpacer/>
+          <Button icon="sap-icon://add" press="onAdd" /> 
+          <Button text="Delete" press="onDelete" enabled="{viewModel>/deleteEnabled}" />     
+        </content>
+      </OverflowToolbar>
+    </headerToolbar>
+    <columns>
+      <Column>
+        <Text text="Product ID"/>
+      </Column>
+      <Column>
+        <Text text="Product Name"/>
+      </Column>   
+      <Column>
+        <Text text="Price"/>
+      </Column>                        
+    </columns>
+    <items>
+			<ColumnListItem type="Navigation" press="onDetailPress">
+				<Text text="{id}"/>
+        <Text text="{name}"/>
+        <Text text="{price}"/>
+			</ColumnListItem>    
+    </items>  
+  </Table>
+</mvc:View>

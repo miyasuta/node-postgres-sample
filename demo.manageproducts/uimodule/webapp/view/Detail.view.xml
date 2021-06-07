@@ -1,0 +1,47 @@
+ <mvc:View controllerName="demo.manageproducts.controller.Detail"
+  displayBlock="true"
+  xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"   
+  xmlns:mvc="sap.ui.core.mvc">
+  <Page title="Prodct Detail" floatingFooter="true" showFooter="{viewModel>/editable}">
+    <headerContent>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="Edit" type="Emphasized" press="onEdit" visible="{= !${viewModel>/editable}}"/>
+        <Button text="Delete" type="Default" press="onDelete" visible="{= !${viewModel>/editable}}"/>
+			</OverflowToolbar>
+    </headerContent>
+    <VBox class="sapUiSmallMargin">
+      <f:SimpleForm id="simpleForm"
+        editable="true"
+        layout="ResponsiveGridLayout"
+        labelSpanXL="3"
+        labelSpanL="3"
+        labelSpanM="3"
+        labelSpanS="12"
+        adjustLabelSpan="false"
+        emptySpanXL="4"
+        emptySpanL="4"
+        emptySpanM="4"
+        emptySpanS="0"
+        columnsXL="1"
+        columnsL="1"
+        columnsM="1"
+        singleContainerFullSize="false" >
+        <f:content>
+          <Label text="Product Name"/>
+          <Input id="productName" value="{name}" editable="{viewModel>/editable}" />
+          <Label text="Price" />
+          <Input id="price" value="{price}" editable="{viewModel>/editable}"/>					               
+        </f:content>
+      </f:SimpleForm>
+    </VBox>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="Save" press="onSave"/>
+			</OverflowToolbar>
+		</footer>    
+  </Page>
+</mvc:View>
