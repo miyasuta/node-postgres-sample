@@ -20,12 +20,7 @@ server:
       afterMiddleware: compression
       configuration:
         port: 35729
-        path: uimodule/webapp
-    - name: ui5-middleware-simpleproxy
-      afterMiddleware: compression
-      mountPath: /node-pg
-      configuration:
-        baseUri: "http://localhost:5000/node-pg"        
+        path: uimodule/webapp       
     
 builder:
   customTasks:

@@ -52,6 +52,7 @@ modules:
    build-parameters:
      builder: custom
      commands:
+       - npm install
        - npm run build:uimodule --prefix ..
      supported-platforms: []     
     

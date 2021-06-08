@@ -32,7 +32,9 @@ sap.ui.define([
             this.sendXMLHttpRequest(method, url, oProduct)
             .then((response)=> {
                 var newId = JSON.parse(response).id
-                MessageToast.show(`Product ${newId} has been created/updated`)
+                MessageToast.show(`Product ${newId} has been created/updated`, {
+                    closeOnBrowserNavigation: false
+                })
                 this.setProperty("viewModel", "busy", false); 
                 var oRouter = this.getRouter();
                 oRouter.navTo("List");  
@@ -49,7 +51,6 @@ sap.ui.define([
                 onClose: this._deleteItem.bind(this)
             }); 
         },
-
         
         onNavButtonPress: function () {
             this.onNavBack()
@@ -63,7 +64,9 @@ sap.ui.define([
             this.setProperty("viewModel", "busy", true); 
             this.sendXMLHttpRequest('DELETE', `/node-pg/products/${id}`)
             .then(()=> {
-                MessageToast.show(`Product ${id} has been deleted`)
+                MessageToast.show(`Product ${id} has been deleted`, {
+                    closeOnBrowserNavigation: false
+                })
                 this.setProperty("viewModel", "busy", false); 
                 var oRouter = this.getRouter();
                 oRouter.navTo("List");  
@@ -81,7 +84,7 @@ sap.ui.define([
                 this._handleCreate();
             //edit or display
             } else {
-                this._handleEditDisplay(id);
+                this._handleDisplay(id);
             }                 
         },
         
@@ -95,10 +98,12 @@ sap.ui.define([
             this._setEditable(true)
         },
 
-        _handleEditDisplay: function (id) {
+        _handleDisplay: function (id) {
             this.setProperty("viewModel", "busy", true); 
+            //バックエンドからデータを取得
             this.sendXMLHttpRequest('GET', `/node-pg/products/${id}`)
             .then((response)=> {
+                //JSONモデルを作成してビューにセット
                 var product = JSON.parse(response)
                 this.getView().setModel(new JSONModel(product))
                 this.getView().bindObject("/")
@@ -109,6 +114,7 @@ sap.ui.define([
                 this.handleError(error)
             })          
         },
+
         _setEditable(bEditable) {
             this.setProperty("viewModel", "editable", bEditable);
         },        

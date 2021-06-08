@@ -4,7 +4,6 @@ const xsenv = require('@sap/xsenv')
 function getConfig () {
     var config = {}
     if (process.env.VCAP_SERVICES) {
-        //uri = xsenv.cfServiceCredentials('cap-posgre-sample-db').uri + `?ssl=true`
         config = {
             connectionString: xsenv.cfServiceCredentials('cap-posgre-sample-db').uri,
             ssl: { rejectUnauthorized: false }

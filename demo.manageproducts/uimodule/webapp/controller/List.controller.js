@@ -18,6 +18,7 @@ sap.ui.define([
             this.setModel(oModel, "viewModel");            
         },
 
+        //登録ボタンを押したとき
         onAdd: function () {
             this.getRouter().navTo("Detail", {});
         },       
@@ -30,6 +31,7 @@ sap.ui.define([
             });            
         },
 
+        //行選択したとき
         onDetailPress: function (oEvent) {
             var id = oEvent.getSource().getBindingContext().getProperty("id");
             this.getRouter().navTo("Detail", {
@@ -51,11 +53,14 @@ sap.ui.define([
         }, 
         
         _doRefresh: function () {
-            this.setProperty("viewModel", "busy", true);   
+            this.setProperty("viewModel", "busy", true);
+            //バックエンドからデータを取得   
             this.sendXMLHttpRequest('GET', '/node-pg/products')
             .then((response)=> {
+                //JSONモデルを作成してビューにセット
                 var products = JSON.parse(response)
                 this.getView().setModel(new JSONModel(products))
+                //idでソート
                 var oSorter = new Sorter("id")
                 oSorter.fnCompare = function(value1, value2) {
                     if (value1 < value2) return -1;
@@ -85,9 +90,7 @@ sap.ui.define([
             Promise.all(aDeletePromises)
             .then(() => {
                 this._doRefresh();
-                MessageToast.show('Selected product(s) have been deleted', {
-                    closeOnBrowserNavigation: false
-                });                      
+                MessageToast.show('Selected product(s) have been deleted');                      
             })
             .catch(error => {
                 this.handleError(error)
